@@ -6,12 +6,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>mixtree • mixtree</title>
-<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
-<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
-<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
-<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
-<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
+<!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="../favicon-96x96.png">
+<link rel="icon" type="”image/svg+xml”" href="../favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="icon" sizes="any" href="../favicon.ico">
+<link rel="manifest" href="../site.webmanifest">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
@@ -58,7 +57,7 @@
                         <h4 data-toc-skip class="author">Cyril
 Geismar</h4>
             
-            <h4 data-toc-skip class="date">2025-02-25</h4>
+            <h4 data-toc-skip class="date">2025-11-23</h4>
       
 
       <div class="d-none name"><code>mixtree.Rmd</code></div>
@@ -66,46 +65,26 @@ Geismar</h4>
 
     
     
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://cygei.github.io/mixtree/" class="external-link">mixtree</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
 <p>The <code>mixtree</code> package provides a statistical framework for
-comparing sets of trees. The function <code><a href="../reference/tree_test.html">tree_test()</a></code>, can
-apply various hypothesis testing approaches to assess differences
-between tree sets. While currently supporting transmission trees, future
-updates will expand functionality to include phylogenetic trees and,
-more generally, directed acyclic graphs (DAGs) .</p>
+comparing sets of trees (“forests”). The function
+<code><a href="../reference/tree_test.html">tree_test()</a></code>, can apply various hypothesis testing
+approaches to assess differences between forests. While currently
+supporting transmission trees, future updates will expand functionality
+to include phylogenetic trees and, graphs more generally.</p>
 </div>
 <div class="section level2">
 <h2 id="methods">Methods<a class="anchor" aria-label="anchor" href="#methods"></a>
 </h2>
-<p>The package implements the following testing methods:</p>
-<ul>
-<li>
-<p><strong>PERMANOVA</strong>: Evaluates whether the topological
-distribution of trees differs between sets.</p>
-<ul>
-<li><p><strong>Null Hypothesis</strong> (H0): Transmission trees in all
-sets are drawn from the same distribution, implying similar
-topologies.</p></li>
-<li><p><strong>Alternative Hypothesis</strong> (H1): At least one set of
-transmission trees comes from a different distribution.</p></li>
-</ul>
-</li>
-<li>
-<p><strong>Chi-Square</strong> or <strong>Fisher’s Exact
-Test</strong>: Evaluates whether the distribution of ancestor-descendant
-pairs differs between sets.</p>
-<ul>
-<li><p>Null Hypothesis (H0): The frequency of ancestor-descendant pairs
-is consistent across all sets.</p></li>
-<li><p>Alternative Hypothesis (H1): The frequency of ancestor-descendant
-pairs differs between at least two sets.</p></li>
-</ul>
-</li>
-</ul>
+<p>The
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>χ</mi><mn>2</mn></msup><annotation encoding="application/x-tex">\chi^2</annotation></semantics></math>
+test compares the absolute frequencies of edges between forests.
+PERMANOVA compares the overall topological structure of trees between
+forests based on pairwise distances.</p>
+<p>Both methods test the null hypothesis that the forests are drawn from
+the same generative process.</p>
 </div>
 <div class="section level2">
 <h2 id="input-requirements">Input Requirements<a class="anchor" aria-label="anchor" href="#input-requirements"></a>
@@ -113,18 +92,19 @@ pairs differs between at least two sets.</p></li>
 <p>Each input set must be a list of data frames. Every data frame
 represents a tree and must contain exactly two columns:</p>
 <ul>
-<li><p><code>from</code>: The parent node (or infector).</p></li>
-<li><p><code>to</code>: The child node (or infectee).</p></li>
+<li><p><code>from</code>: The parent node.</p></li>
+<li><p><code>to</code>: The child node.</p></li>
 </ul>
 <p><code>make_tree</code> is a helper function that simulates a DAG with
 the number of branches per node drawn from a Poisson distribution with
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>λ</mi><annotation encoding="application/x-tex">\lambda</annotation></semantics></math>
 = <code>R</code> when <code>stochastic = TRUE</code></p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span> <span class="fu"><a href="../reference/make_tree.html">make_tree</a></span><span class="op">(</span><span class="fl">20</span>, R <span class="op">=</span> <span class="fl">2</span>, stochastic <span class="op">=</span> <span class="cn">TRUE</span>, plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="mixtree_files/figure-html/make_tree-1.png" width="700"></p>
-<pre><code><span><span class="co">#&gt; IGRAPH 0586988 D--- 20 19 -- </span></span>
-<span><span class="co">#&gt; + edges from 0586988:</span></span>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://cygei.github.io/mixtree/" class="external-link">mixtree</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/make_tree.html">make_tree</a></span><span class="op">(</span><span class="fl">20</span>, R <span class="op">=</span> <span class="fl">2</span>, stochastic <span class="op">=</span> <span class="cn">TRUE</span>, plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<p><img src="mixtree_files/figure-html/make_tree-1.png" class="r-plt" width="700"></p>
+<pre><code><span><span class="co">#&gt; IGRAPH c24c754 D--- 20 19 -- </span></span>
+<span><span class="co">#&gt; + edges from c24c754:</span></span>
 <span><span class="co">#&gt;  [1]  1-&gt; 2  1-&gt; 3  2-&gt; 4  2-&gt; 5  2-&gt; 6  3-&gt; 7  3-&gt; 8  4-&gt; 9  5-&gt;10  5-&gt;11</span></span>
 <span><span class="co">#&gt; [11]  6-&gt;12  6-&gt;13  7-&gt;14  7-&gt;15  8-&gt;16  9-&gt;17  9-&gt;18  9-&gt;19 10-&gt;20</span></span></code></pre>
 </div>
@@ -137,7 +117,7 @@ desired testing method via the <code>method</code> parameter.</p>
 <div class="section level3">
 <h3 id="permanova">PERMANOVA<a class="anchor" aria-label="anchor" href="#permanova"></a>
 </h3>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
 <span><span class="co"># Generate 100 trees with R₀ = 2</span></span>
 <span><span class="va">chainA</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span>, <span class="kw">function</span><span class="op">(</span><span class="va">i</span><span class="op">)</span><span class="op">{</span></span>
@@ -169,7 +149,7 @@ hypothesis of no difference.</p>
 <div class="section level3">
 <h3 id="chi-square-test">Chi-Square Test<a class="anchor" aria-label="anchor" href="#chi-square-test"></a>
 </h3>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/tree_test.html">tree_test</a></span><span class="op">(</span><span class="va">chainA</span>, <span class="va">chainB</span>, method <span class="op">=</span> <span class="st">"chisq"</span>, test_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>simulate.p.value <span class="op">=</span> <span class="cn">TRUE</span>, B <span class="op">=</span> <span class="fl">999</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  Pearson's Chi-squared test with simulated p-value (based on 999</span></span>
@@ -187,13 +167,13 @@ to customise the testing process:</p>
 <ul>
 <li><p><code>within_dist</code>: A function to compute pairwise
 distances within a tree (used with PERMANOVA). Default is
-<code>patristic</code>.</p></li>
+<code><a href="../reference/patristic.html">patristic()</a></code>.</p></li>
 <li><p><code>between_dist</code>: A function to compute the distance
 between two trees (used with PERMANOVA). Default is
-<code>euclidean</code>.</p></li>
+<code><a href="../reference/euclidean.html">euclidean()</a></code>.</p></li>
 <li><p><code>test_args</code>: A list of extra arguments passed to the
 underlying test function
-(i.e. <code><a href="https://rdrr.io/pkg/vegan/man/adonis.html" class="external-link">vegan::adonis2</a></code>,<code><a href="https://rdrr.io/r/stats/chisq.test.html" class="external-link">stats::chisq.test</a></code>, or
+(i.e. <code><a href="https://vegandevs.github.io/vegan/reference/adonis.html" class="external-link">vegan::adonis2</a></code>,<code><a href="https://rdrr.io/r/stats/chisq.test.html" class="external-link">stats::chisq.test</a></code>, or
 <code><a href="https://rdrr.io/r/stats/fisher.test.html" class="external-link">stats::fisher.test</a></code>).</p></li>
 </ul>
 <div class="section level3">
@@ -203,34 +183,21 @@ underlying test function
 depth measure described in <a href="https://projecteuclid.org/journals/statistical-science/volume-33/issue-1/Estimating-Transmission-from-Genetic-and-Epidemiological-Data--A-Metric/10.1214/17-STS637.full" class="external-link">Kendall
 <em>et al.</em>(2018)</a>. See also the <a href="https://thibautjombart.github.io/treespace/articles/TransmissionTreesVignette.html" class="external-link">vignette</a>
 from <code>treespace</code>.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://cran.r-project.org/package=treespace" class="external-link">treespace</a></span><span class="op">)</span></span>
 <span><span class="va">mrciDepth</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">tree</span><span class="op">)</span> <span class="op">{</span></span>
 <span> <span class="fu">treespace</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/treespace/man/findMRCIs.html" class="external-link">findMRCIs</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">tree</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="va">mrciDepths</span></span>
 <span><span class="op">}</span></span>
-<span><span class="fu"><a href="../reference/tree_test.html">tree_test</a></span><span class="op">(</span><span class="va">chainA</span>, <span class="va">chainB</span>, within_dist <span class="op">=</span> <span class="va">mrciDepth</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Permutation test for adonis under reduced model</span></span>
-<span><span class="co">#&gt; Permutation: free</span></span>
-<span><span class="co">#&gt; Number of permutations: 999</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; (function (formula, data, permutations = 999, method = "bray", sqrt.dist = FALSE, add = FALSE, by = NULL, parallel = getOption("mc.cores"), na.action = na.fail, strata = NULL, ...) </span></span>
-<span><span class="co">#&gt;           Df SumOfSqs      R2      F Pr(&gt;F)    </span></span>
-<span><span class="co">#&gt; Model      1   3723.5 0.14315 33.078  0.001 ***</span></span>
-<span><span class="co">#&gt; Residual 198  22288.0 0.85685                  </span></span>
-<span><span class="co">#&gt; Total    199  26011.5 1.00000                  </span></span>
-<span><span class="co">#&gt; ---</span></span>
-<span><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/tree_test.html">tree_test</a></span><span class="op">(</span><span class="va">chainA</span>, <span class="va">chainB</span>, within_dist <span class="op">=</span> <span class="va">mrciDepth</span><span class="op">)</span></span></code></pre></div>
 <div class="section level4">
 <h4 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a>
 </h4>
 <p>Randomly shuffling node IDs will not affect the PERMANOVA test
-results if the distance functions are invariant to node labelling. Since
-the test focuses on the tree’s topology and branch lengths rather than
-the specific identifiers, metrics such as patristic distances—derived
-solely from the tree structure—remain unchanged when node IDs are
-permuted. However, if a custom function depends on the order or specific
-labels of nodes, then shuffling could influence the results.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+results if the distance functions are invariant to node labelling
+(e.g. <code><a href="../reference/patristic.html">patristic()</a></code>). However, if a custom function depends
+on the order or specific labels of nodes, then shuffling could influence
+the results (e.g. <code><a href="https://rdrr.io/pkg/treespace/man/findMRCIs.html" class="external-link">treespace::findMRCIs</a></code>).</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">chainA</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">50</span>, <span class="kw">function</span><span class="op">(</span><span class="va">i</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="../reference/make_tree.html">make_tree</a></span><span class="op">(</span><span class="fl">20</span>, R <span class="op">=</span> <span class="fl">2</span>, stochastic <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
@@ -249,16 +216,16 @@ labels of nodes, then shuffling could influence the results.</p>
 <span><span class="co">#&gt; (function (formula, data, permutations = 999, method = "bray", sqrt.dist = FALSE, add = FALSE, by = NULL, parallel = getOption("mc.cores"), na.action = na.fail, strata = NULL, ...) </span></span>
 <span><span class="co">#&gt;          Df SumOfSqs R2  F Pr(&gt;F)</span></span>
 <span><span class="co">#&gt; Model     1        0  0  0      1</span></span>
-<span><span class="co">#&gt; Residual 98    29757  1          </span></span>
-<span><span class="co">#&gt; Total    99    29757  1</span></span>
+<span><span class="co">#&gt; Residual 98    32796  1          </span></span>
+<span><span class="co">#&gt; Total    99    32796  1</span></span>
 <span></span>
-<span><span class="co"># In contrast, the Chi-Square test will reject the null as it compare the distribution of of ancestries for each case</span></span>
+<span><span class="co"># In contrast, the Chi-Square test will reject the null as it compare edge frequencies</span></span>
 <span><span class="fu"><a href="../reference/tree_test.html">tree_test</a></span><span class="op">(</span><span class="va">chainA</span>, <span class="va">chainB</span>, method <span class="op">=</span> <span class="st">"chisq"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  Pearson's Chi-squared test</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; data:  count data</span></span>
-<span><span class="co">#&gt; X-squared = 778.2, df = 207, p-value &lt; 2.2e-16</span></span></code></pre></div>
+<span><span class="co">#&gt; X-squared = 849.55, df = 193, p-value &lt; 2.2e-16</span></span></code></pre></div>
 </div>
 </div>
 </div>
@@ -267,8 +234,7 @@ labels of nodes, then shuffling could influence the results.</p>
 </h2>
 <p>While the current implementation focuses on transmission trees, the
 package is designed with extensibility in mind. Future versions will
-support phylogenetic trees and Directed Acyclic Graphs (DAGs) more
-generally.</p>
+support phylogenetic trees and graphs more generally.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
@@ -281,7 +247,7 @@ generally.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>

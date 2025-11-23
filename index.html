@@ -6,12 +6,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>A Statistical Framework for Comparing Sets of Trees • mixtree</title>
-<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
-<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="apple-touch-icon-120x120.png">
-<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
-<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
+<!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
+<link rel="icon" type="”image/svg+xml”" href="favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" sizes="any" href="favicon.ico">
+<link rel="manifest" href="site.webmanifest">
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
@@ -54,12 +53,15 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header">
-<img src="logo.png" class="logo" alt=""><h1 id="mixtree">mixtree<a class="anchor" aria-label="anchor" href="#mixtree"></a>
+<img src="logo.png" class="logo" alt=""><h1 id="mixtree-">mixtree 
+<a class="anchor" aria-label="anchor" href="#mixtree-"></a>
 </h1>
 </div>
 <!-- badges: start -->
 
-<p>The <code>mixtree</code> package provides a statistical framework for comparing sets of trees.</p>
+<!-- badges: end -->
+<p>Bayesian inference methods are increasingly used to reconstruct trees (<em>e.g.</em> phylogenetic or transmission trees) producing collections of trees, or “forests”.</p>
+<p><code>mixtree</code> provides a statistical framework to compare sets of trees and test whether they originate from the same or different generative processes.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -94,14 +96,21 @@
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; (function (formula, data, permutations = 999, method = "bray", sqrt.dist = FALSE, add = FALSE, by = NULL, parallel = getOption("mc.cores"), na.action = na.fail, strata = NULL, ...) </span></span>
 <span><span class="co">#&gt;           Df SumOfSqs      R2      F Pr(&gt;F)    </span></span>
-<span><span class="co">#&gt; Model      1     6730 0.13248 30.236  0.001 ***</span></span>
-<span><span class="co">#&gt; Residual 198    44071 0.86752                  </span></span>
-<span><span class="co">#&gt; Total    199    50801 1.00000                  </span></span>
+<span><span class="co">#&gt; Model      1     5490 0.10518 23.274  0.001 ***</span></span>
+<span><span class="co">#&gt; Residual 198    46710 0.89482                  </span></span>
+<span><span class="co">#&gt; Total    199    52201 1.00000                  </span></span>
 <span><span class="co">#&gt; ---</span></span>
 <span><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span></code></pre></div>
 </div>
 
-  </main><aside class="col-md-3"><div class="license">
+  </main><aside class="col-md-3"><div class="links">
+<h2 data-toc-skip>Links</h2>
+<ul class="list-unstyled">
+<li><a href="https://cloud.r-project.org/package=mixtree" class="external-link">View on CRAN</a></li>
+</ul>
+</div>
+
+<div class="license">
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
@@ -120,7 +129,7 @@
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Cyril Geismar <br><small class="roles"> Author, maintainer, copyright holder </small> <a href="https://orcid.org/0000-0002-8486-5890" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Cyril Geismar <br><small class="roles"> Author, maintainer, copyright holder </small> <a href="https://orcid.org/0000-0002-8486-5890" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
 </ul>
 </div>
 
@@ -128,6 +137,10 @@
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://github.com/CyGei/mixtree/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/CyGei/mixtree/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://www.codefactor.io/repository/github/cygei/mixtree" class="external-link"><img src="https://www.codefactor.io/repository/github/cygei/mixtree/badge" alt="CodeFactor"></a></li>
+<li><a href="https://lifecycle.r-lib.org/articles/stages.html#stable" class="external-link"><img src="https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg" alt="Lifecycle:experimental"></a></li>
+<li><a href="https://CRAN.R-project.org/package=mixtree" class="external-link"><img src="https://www.r-pkg.org/badges/version/mixtree" alt="CRAN status"></a></li>
+<li><a href="https://CRAN.R-project.org/package=mixtree" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/grand-total/mixtree" alt="CRAN downloads"></a></li>
 </ul>
 </div>
 
@@ -140,7 +153,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>
