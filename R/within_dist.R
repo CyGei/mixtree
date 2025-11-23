@@ -38,17 +38,22 @@ abouheif <- function(tree) {
   # identify pairs of nodes with > 1 patristic distance
   # i.e. where there's at least one node between them
   patristic_dist <- igraph::distances(g)
-  pairs <- which(lower.tri(patristic_dist) &
-                   patristic_dist > 1, arr.ind = TRUE)
+  pairs <- which(
+    lower.tri(patristic_dist) &
+      patristic_dist > 1,
+    arr.ind = TRUE
+  )
 
   # degree of each node (DD = R_case + 2)
   DD <- igraph::degree(g)
 
   # identify the nodes in the path (P) between pairs
   DDP <- apply(pairs, 1, function(p) {
-    nodes <- igraph::shortest_paths(graph = g,
-                                    from = p[[1]],
-                                    to = p[[2]])$vpath[[1]]
+    nodes <- igraph::shortest_paths(
+      graph = g,
+      from = p[[1]],
+      to = p[[2]]
+    )$vpath[[1]]
     nodes <- nodes[-c(1, length(nodes))]
     prod(DD[nodes])
   })
@@ -69,9 +74,13 @@ abouheif <- function(tree) {
 #' @param tree A data frame representing a transmission tree, with the first column containing the infector IDs and the second the infectee IDs.
 #' @return A square, symmetric matrix of Kendall's distances between nodes.
 #' @examples
-#' tree <- data.frame(from = c(1, 1, 2, 2, 3, 3), to = c(2, 3, 4, 5, 6, 7))
-#' kendall(tree)
-#' @importFrom treespace findMRCIs
+#' \dontrun{
+#'   # Only run this example if treespace is installed
+#'   if (requireNamespace("treespace", quietly = TRUE)) {
+#'     tree <- data.frame(from = c(1, 1, 2, 2, 3, 3), to = c(2, 3, 4, 5, 6, 7))
+#'     kendall(tree)
+#'   }
+#' }
 #' @references
 #' A Metric to Compare Transmission Trees - M Kendall · 2018
 #' @seealso \code{\link[treespace]{findMRCIs}}

@@ -8,10 +8,11 @@ Description: Apply hypothesis testing methods to assess differences between sets
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
-Imports: igraph, treespace, vegan
+RoxygenNote: 7.3.3
+Imports: igraph, vegan
 Suggests: 
     knitr,
-    rmarkdown
+    rmarkdown,
+    treespace
 VignetteBuilder: knitr
 URL: https://cygei.github.io/mixtree/

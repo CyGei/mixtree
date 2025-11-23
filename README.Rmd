@@ -15,13 +15,17 @@ knitr::opts_chunk$set(
 )
 ```
 
-# mixtree
+# mixtree <a href="https://cygei.github.io/epitree/"><img src="man/figures/logo.png" alt="mixtree website" align="right" height="242"/></a>
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/CyGei/mixtree/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/CyGei/mixtree/actions/workflows/R-CMD-check.yaml)
+
+[![R-CMD-check](https://github.com/CyGei/mixtree/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/CyGei/mixtree/actions/workflows/R-CMD-check.yaml) [![CodeFactor](https://www.codefactor.io/repository/github/cygei/mixtree/badge)](https://www.codefactor.io/repository/github/cygei/mixtree) [![Lifecycle:experimental](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable) [![CRAN status](https://www.r-pkg.org/badges/version/mixtree)](https://CRAN.R-project.org/package=mixtree) [![CRAN downloads](https://cranlogs.r-pkg.org/badges/grand-total/mixtree)](https://CRAN.R-project.org/package=mixtree)
+
 <!-- badges: end -->
 
-The `mixtree` package provides a statistical framework for comparing sets of trees.
+Bayesian inference methods are increasingly used to reconstruct trees (*e.g.* phylogenetic or transmission trees) producing collections of trees, or "forests".
+
+`mixtree` provides a statistical framework to compare sets of trees and test whether they originate from the same or different generative processes.
 
 ## Installation
 
@@ -52,4 +56,3 @@ result <- tree_test(chainA, chainB)
 print(result)
 
 ```
-
