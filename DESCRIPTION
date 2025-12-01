@@ -15,4 +15,5 @@ Suggests:
     rmarkdown,
     treespace
 VignetteBuilder: knitr
-URL: https://cygei.github.io/mixtree/
+URL: https://github.com/CyGei/mixtree, https://cygei.github.io/mixtree/
+BugReports: https://github.com/CyGei/mixtree/issues
