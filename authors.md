@@ -8,12 +8,12 @@
 ## Citation
 
 Geismar C (2025). *mixtree: A Statistical Framework for Comparing Sets
-of Trees*. R package version 0.0.1, <https://cygei.github.io/mixtree/>.
+of Trees*. R package version 0.0.1, <https://github.com/CyGei/mixtree>.
 
     @Manual{,
       title = {mixtree: A Statistical Framework for Comparing Sets of Trees},
       author = {Cyril Geismar},
       year = {2025},
       note = {R package version 0.0.1},
-      url = {https://cygei.github.io/mixtree/},
+      url = {https://github.com/CyGei/mixtree},
     }

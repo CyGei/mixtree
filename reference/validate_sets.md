@@ -3,7 +3,7 @@
 Checks that the provided input is a list of at least two valid sets of
 transmission trees. Each set is expected to be a list containing at
 least one data frame, as verified by
-[`validate_set`](https://cygei.github.io/epitree/reference/validate_set.md).
+[`validate_set`](https://cygei.github.io/mixtree/reference/validate_set.md).
 
 ## Usage
 
@@ -30,5 +30,5 @@ set is a data frame.
 
 ## See also
 
-[`validate_set`](https://cygei.github.io/epitree/reference/validate_set.md)
+[`validate_set`](https://cygei.github.io/mixtree/reference/validate_set.md)
 for validating an individual set.

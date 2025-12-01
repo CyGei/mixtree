@@ -4,7 +4,7 @@
 
 The `mixtree` package provides a statistical framework for comparing
 sets of trees (“forests”). The function
-[`tree_test()`](https://cygei.github.io/epitree/reference/tree_test.md),
+[`tree_test()`](https://cygei.github.io/mixtree/reference/tree_test.md),
 can apply various hypothesis testing approaches to assess differences
 between forests. While currently supporting transmission trees, future
 updates will expand functionality to include phylogenetic trees and,
@@ -39,15 +39,15 @@ make_tree(20, R = 2, stochastic = TRUE, plot = TRUE)
 
 ![](mixtree_files/figure-html/make_tree-1.png)
 
-    #> IGRAPH c24c754 D--- 20 19 -- 
-    #> + edges from c24c754:
+    #> IGRAPH fdcd504 D--- 20 19 -- 
+    #> + edges from fdcd504:
     #>  [1]  1-> 2  1-> 3  2-> 4  2-> 5  2-> 6  3-> 7  3-> 8  4-> 9  5->10  5->11
     #> [11]  6->12  6->13  7->14  7->15  8->16  9->17  9->18  9->19 10->20
 
 ## Usage
 
 The unified interface is provided by the
-[`tree_test()`](https://cygei.github.io/epitree/reference/tree_test.md)
+[`tree_test()`](https://cygei.github.io/mixtree/reference/tree_test.md)
 function. Users can supply two or more sets of trees and select the
 desired testing method via the `method` parameter.
 
@@ -99,16 +99,16 @@ tree_test(chainA, chainB, method = "chisq", test_args = list(simulate.p.value = 
 ## Advanced Usage
 
 The
-[`tree_test()`](https://cygei.github.io/epitree/reference/tree_test.md)
+[`tree_test()`](https://cygei.github.io/mixtree/reference/tree_test.md)
 function accepts additional parameters to customise the testing process:
 
 - `within_dist`: A function to compute pairwise distances within a tree
   (used with PERMANOVA). Default is
-  [`patristic()`](https://cygei.github.io/epitree/reference/patristic.md).
+  [`patristic()`](https://cygei.github.io/mixtree/reference/patristic.md).
 
 - `between_dist`: A function to compute the distance between two trees
   (used with PERMANOVA). Default is
-  [`euclidean()`](https://cygei.github.io/epitree/reference/euclidean.md).
+  [`euclidean()`](https://cygei.github.io/mixtree/reference/euclidean.md).
 
 - `test_args`: A list of extra arguments passed to the underlying test
   function
@@ -136,7 +136,7 @@ tree_test(chainA, chainB, within_dist = mrciDepth)
 
 Randomly shuffling node IDs will not affect the PERMANOVA test results
 if the distance functions are invariant to node labelling
-(e.g. [`patristic()`](https://cygei.github.io/epitree/reference/patristic.md)).
+(e.g. [`patristic()`](https://cygei.github.io/mixtree/reference/patristic.md)).
 However, if a custom function depends on the order or specific labels of
 nodes, then shuffling could influence the results
 (e.g. [`treespace::findMRCIs`](https://rdrr.io/pkg/treespace/man/findMRCIs.html)).

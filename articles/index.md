@@ -2,4 +2,4 @@
 
 ### All vignettes
 
-- [mixtree](https://cygei.github.io/epitree/articles/mixtree.md):
+- [mixtree](https://cygei.github.io/mixtree/articles/mixtree.md):

@@ -32,13 +32,13 @@ tree_test(
 
   A function to compute pairwise distances within a tree for PERMANOVA.
   Takes a data frame, returns a square matrix. Default is
-  [`patristic`](https://cygei.github.io/epitree/reference/patristic.md).
+  [`patristic`](https://cygei.github.io/mixtree/reference/patristic.md).
 
 - between_dist:
 
   A function to compute distance between two trees for PERMANOVA. Takes
   two matrices, returns a numeric value. Default is
-  [`euclidean`](https://cygei.github.io/epitree/reference/euclidean.md).
+  [`euclidean`](https://cygei.github.io/mixtree/reference/euclidean.md).
 
 - test_args:
 
