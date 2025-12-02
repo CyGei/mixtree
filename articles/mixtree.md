@@ -39,8 +39,8 @@ make_tree(20, R = 2, stochastic = TRUE, plot = TRUE)
 
 ![](mixtree_files/figure-html/make_tree-1.png)
 
-    #> IGRAPH fdcd504 D--- 20 19 -- 
-    #> + edges from fdcd504:
+    #> IGRAPH c1ee958 D--- 20 19 -- 
+    #> + edges from c1ee958:
     #>  [1]  1-> 2  1-> 3  2-> 4  2-> 5  2-> 6  3-> 7  3-> 8  4-> 9  5->10  5->11
     #> [11]  6->12  6->13  7->14  7->15  8->16  9->17  9->18  9->19 10->20
 
