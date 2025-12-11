@@ -25,12 +25,10 @@ processes.
 
 ## Installation
 
-You can install the development version of mixtree from
-[GitHub](https://github.com/) with:
+You can install the package on CRAN with:
 
 ``` r
-# install.packages("pak")
-pak::pak("CyGei/mixtree")
+install.packages("mixtree")
 ```
 
 # Quick start
